@@ -1,0 +1,45 @@
+<!DOCTYPE html> 
+<html lang="en" dir="ltr"> 
+<head> 
+	<meta charset="utf-8"> 
+
+	<title>ChatApp</title> 
+</head> 
+<body class="chat"> 
+		<!-- <form id='message-form'> 
+		<input name='message' type="text"placeholder="Message"
+				autofocus autocomplete="off"/> 
+		<button >Send</button> 
+		</form>  -->
+		<div>Welcome</div>
+		<div id="port"></div>
+
+<!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script>  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script> 
+	var socket=io.connect('http://localhost:3000/'); 
+
+	// connection with server 
+	socket.on('connect', function(){ 
+		console.log('Connected to Server') 
+	}); 
+
+	// message listener from server 
+	socket.on('getPort', function(message){ 
+		console.log(message);
+		document.getElementById('port').innerText(message); 
+	}); 
+
+	// emits message from user side 
+	socket.emit('createMessage', { 
+	to:'john@ds', 
+	text:'what kjkljd'
+	}); 
+
+	// when disconnected from server 
+	socket.on('disconnect', function(){ 
+	console.log('Disconnect from server') 
+	}); 
+</script> 
+</body> 
+</html> 
